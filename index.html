@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Interpreter — English ↔ Kannada</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>AI Interpreter — English ↔ Kannada</h1>
+    <p>Listen in Kannada → See English → Type English → Speak Kannada</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="row between">
+        <h2>1) Listen in Kannada</h2>
+        <small id="sttStatus">STT: checking…</small>
+      </div>
+      <div class="actions">
+        <button id="btnStart">Start listening (Kannada)</button>
+        <button id="btnStop" disabled>Stop</button>
+        <button id="btnReset">Reset</button>
+      </div>
+      <textarea id="knHeard" placeholder="Live transcript (Kannada)…"></textarea>
+      <div class="actions">
+        <button id="btnTranslateToEn">Translate to English</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2) English meaning</h2>
+      <textarea id="enMeaning" placeholder="English translation…" readonly></textarea>
+    </section>
+
+    <section class="card">
+      <h2>3) Your reply in English</h2>
+      <textarea id="myReplyEn" placeholder="Type your response in English…"></textarea>
+      <div class="actions">
+        <button id="btnTranslateToKn">Translate to Kannada & Speak</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h2>4) Kannada output</h2>
+        <small id="ttsStatus">TTS: checking…</small>
+      </div>
+      <textarea id="knReply" placeholder="Kannada translation…" readonly></textarea>
+      <div class="actions">
+        <button id="btnSpeakAgain" disabled>▶️ Speak again</button>
+        <button id="btnCopy" disabled>Copy text</button>
+      </div>
+    </section>
+
+    <section class="card subtle">
+      <div id="statusLine"></div>
+      <div id="errorLine" class="error"></div>
+      <p class="hint">Tip: Use Chrome on Android/desktop for best mic and voices. Install to Home Screen for app-like experience.</p>
+      <button id="btnInstall" style="display:none">Install App</button>
+    </section>
+  </main>
+
+  <footer>
+    <small>Built for live bilingual conversations. Works offline for UI; translation requires internet.</small>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+  </script>
+</body>
+</html>
